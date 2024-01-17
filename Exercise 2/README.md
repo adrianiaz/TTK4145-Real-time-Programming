@@ -46,7 +46,19 @@ We have set up a server on the real time lab that you're going to communicate wi
 The server broadcasts its own IP address on port `30000`. Listen for messages on this port to find it. You should write down the IP address, as you will need it for again later in the exercise.
 
 ### Sending UDP packets:
-The server will respond to any message you send to it. Try sending a message to the server IP on port `20000 + n` where `n` is the number of the workspace you're sitting at. Listen to messages from the server and print them to a terminal to confirm that the messages are in fact being responded to.
+The server will respond to any message you send to it. Try sending a message to the server IP on port `20000 + n` wh
+
+Exactly how you do communication for the project is up to you, so if you want to venture out into the land of libraries you should make sure that the library satisfies all your requirements, and knowing how TCP and UDP work will help you make an informed decision. You should also check the license.
+
+---
+
+If you are doing this exercise in Erlang or Elixir, you will want to skip the part about TCP, and learn how to use Nodes instead. But UDP might still be useful, in order to make something that can auto-detect the IP addresses of the other nodes on the network. Some links to get you started:
+ - Distributed Erlang (http://erlang.org/doc/reference_manual/distributed.html)
+ - Elixir School on OTP Distribution (https://elixirschool.com/en/lessons/advanced/otp_distribution)
+ - Elixir documentation on `Node` (https://hexdocs.pm/elixir/Node.html). 
+
+---
+ere `n` is the number of the workspace you're sitting at. Listen to messages from the server and print them to a terminal to confirm that the messages are in fact being responded to.
 
 - The server will act the same way if you send a broadcast (`#.#.#.255` or `255.255.255.255`) instead of sending directly to the server.
   - If you use broadcast, the messages will loop back to you! The server prefixes its reply with "You said: ", so you can tell if you are getting a reply from the server or if you are just listening to yourself.
@@ -83,6 +95,113 @@ This new connection will behave the same way on the server-side, so you can send
 
 2.1: Network design
 -------------------
+
+This exercise serves three goals:
+ - Understanding networking:  
+   The main goal is to find or create a networking module that can be used in your project, and understand what it does and how it does it well enough that you are able to make proper use of it.
+ - Experience with multithreading:  
+   It is very likely that you will be using multithreading in the project, and you will find good use for multithreading in this exercise.
+ - Experience with a new programming language:  
+   It is also very likely that you will be using a new programming language for the project, so you should use this exercise as a case study to try, learn - and possibly even reject - whatever language(s) you want.
+
+This exercise does not make any explicit requirements or recommendations for multithreading or language. As for the networking-infrastructure-goal, you should keep the end goal in sight (the project, and what it needs), and not get (too) bogged down by the details. But the details are still important, as they are what give you the understanding needed.
+
+From here, the exercise is roughly divided into two parts:
+ 1. The first part is to make you more familiar with using TCP and UDP for communication between processes running on different machines. Do not think about code quality here - there are a lot of new things to learn, so focus on exploration and understanding.  
+ This part should be handed in for approval.
+ 2. The second part will have you consider the things you have learned about these two protocols, and either create or find (or modify) a network module that you can use in your project.  
+ This part does not have to be handed in, but you may find it useful to discuss with the student assistants.
+
+Exactly how you do communication for the project is up to you, so if you want to venture out into the land of libraries you should make sure that the library satisfies all your requirements, and knowing how TCP and UDP work will help you make an informed decision. You should also check the license.
+
+---
+This exercise serves three goals:
+ - Understanding networking:  
+   The main goal is to find or create a networking module that can be used in your project, and understand what it does and how it does it well enough that you are able to make proper use of it.
+ - Experience with multithreading:  
+   It is very likely that you will be using multithreading in the project, and you will find good use for multithreading in this exercise.
+ - Experience with a new programming language:  
+   It is also very likely that you will be using a new programming language for the project, so you should use this exercise as a case study to try, learn - and possibly even reject - whatever language(s) you want.
+
+This exercise does not make any explicit requirements or recommendations for multithreading or language. As for the networking-infrastructure-goal, you should keep the end goal in sight (the project, and what it needs), and not get (too) bogged down by the details. But the details are still important, as they are what give you the understanding needed.
+
+From here, the exercise is roughly divided into two parts:
+ 1. The first part is to make you more familiar with using TCP and UDP for communication between processes running on different machines. Do not think about code quality here - there are a lot of new things to learn, so focus on exploration and understanding.  
+ This part should be handed in for approval.
+ 2. The second part will have you consider the things you have learned about these two protocols, and either create or find (or modify) a network module that you can use in your project.  
+ This part does not have to be handed in, but you may find it useful to discuss with the student assistants.
+
+Exactly how you do communication for the project is up to you, so if you want to venture out into the land of libraries you should make sure that the library satisfies all your requirements, and knowing how TCP and UDP work will help you make an informed decision. You should also check the license.
+
+---
+
+If you are doing this exercise in Erlang or Elixir, you will want to skip the part about TCP, and learn how to use Nodes instead. But UDP might still be useful, in order to make something that can auto-detect the IP addresses of the other nodes on the network. Some links to get you started:
+ - Distributed Erlang (http://erlang.org/doc/reference_manual/distributed.html)
+ - Elixir School on OTP Distribution (https://elixirschool.com/en/lessons/advanced/otp_distribution)
+ - Elixir documentation on `Node` (https://hexdocs.pm/elixir/Node.html). 
+
+---
+2.1: Network design
+-------------------
+
+This exercise serves three goals:
+ - Understanding networking:  
+   The main goal is to find or create a networking module that can be used in your project, and understand what it does and how it does it well enough that you are able to make proper use of it.
+ - Experience with multithreading:  
+   It is very likely that you will be using multithreading in the project, and you will find good use for multithreading in this exercise.
+ - Experience with a new programming language:  
+   It is also very likely that you will be using a new programming language for the project, so you should use this exercise as a case study to try, learn - and possibly even reject - whatever language(s) you want.
+
+This exercise does not make any explicit requirements or recommendations for multithreading or language. As for the networking-infrastructure-goal, you should keep the end goal in sight (the project, and what it needs), and not get (too) bogged down by the details. But the details are still important, as they are what give you the understanding needed.
+
+From here, the exercise is roughly divided into two parts:
+ 1. The first part is to make you more familiar with using TCP and UDP for communication between processes running on different machines. Do not think about code quality here - there are a lot of new things to learn, so focus on exploration and understanding.  
+ This part should be handed in for approval.
+ 2. The second part will have you consider the things you have learned about these two protocols, and either create or find (or modify) a network module that you can use in your project.  
+ This part does not have to be handed in, but you may find it useful to discuss with the student assistants.
+
+Exactly how you do communication for the project is up to you, so if you want to venture out into the land of libraries you should make sure that the library satisfies all your requirements, and knowing how TCP and UDP work will help you make an informed decision. You should also check the license.
+
+---
+This exercise serves three goals:
+ - Understanding networking:  
+   The main goal is to find or create a networking module that can be used in your project, and understand what it does and how it does it well enough that you are able to make proper use of it.
+ - Experience with multithreading:  
+   It is very likely that you will be using multithreading in t
+
+Since network programming requires that both sending and receiving works at the same time, it becomes quite difficult to get things right when starting out. This exercise comes with a pre-made network server, so that you can incrementally create one new thing at a time. On the lab, this networking server is run on the machine near the student assistants (so you do not need to do anything to set it up), and also prints out a full log of everything. If you are working from home, you may want to run such a server yourself, and instructions to do so are found in this document (./working-from-home.md).
+
+Practical tips:
+ - Sharing a socket between threads should not be a problem, although reading from a socket in two threads will probably mean that only one of the threads gets the message. If you are using blocking sockets, you could create a "receiving"-thread for each socket. 
+   - Alternatively, you can use socket sets and the `select()` (http://en.wikipedia.org/wiki/Select_%28Unix%29) function (or its equivalent). Note that this is not the same "select" as in message passing - although its functionality is the same: it gives you the ability wait for activity on several connections simultaneously.
+ - Be nice to the network: Put some amount of `sleep()` or equivalent in the loops that send messages. The network at the lab will be shut off if IT finds a DDOS-esque level of traffic. Yes, this has happened before. Several times.
+ - You can find some pseudocode here (resources.md) to get you started.
+
+
+1.1: UDP
+--------
+
+We have set up a server on the real time lab that you're going to communicate with in this exercise. Be sure that the server is running before you start debugging something that actually works - just ask a student assistant to turn it on for you.
+
+### Receiving UDP packets, and finding the server IP:
+The server broadcasts its own IP address on port `30000`. Listen for messages on this port to find it. You should write down the IP address, as you will need it for again later in the exercise.
+
+Since network programming requires that both sending and receiving works at the same time, it becomes quite difficult to get things right when starting out. This exercise comes with a pre-made network server, so that you can incrementally create one new thing at a time. On the lab, this networking server is run on the machine near the student assistants (so you do not need to do anything to set it up), and also prints out a full log of everything. If you are working from home, you may want to run such a server yourself, and instructions to do so are found in this document (./working-from-home.md).
+
+Practical tips:
+ - Sharing a socket between threads should not be a problem, although reading from a socket in two threads will probably mean that only one of the threads gets the message. If you are using blocking sockets, you could create a "receiving"-thread for each socket. 
+   - Alternatively, you can use socket sets and the `select()` (http://en.wikipedia.org/wiki/Select_%28Unix%29) function (or its equivalent). Note that this is not the same "select" as in message passing - although its functionality is the same: it gives you the ability wait for activity on several connections simultaneously.
+ - Be nice to the network: Put some amount of `sleep()` or equivalent in the loops that send messages. The network at the lab will be shut off if IT finds a DDOS-esque level of traffic. Yes, this has happened before. Several times.
+ - You can find some pseudocode here (resources.md) to get you started.
+
+
+1.1: UDP
+--------
+
+We have set up a server on the real time lab that you're going to communicate with in this exercise. Be sure that the server is running before you start debugging something that actually works - just ask a student assistant to turn it on for you.
+
+### Receiving UDP packets, and finding the server IP:
+The server broadcasts its own IP address on port `30000`. Listen for messages on this port to find it. You should write down the IP address, as you will need it for again later in the exercise.
 
 Before proceeding with any code related to a network module, think about how you would solve these problems, and what you need in order to solve them.
 
