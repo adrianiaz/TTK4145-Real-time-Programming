@@ -15,7 +15,7 @@ func server(c1 chan int, q1 chan int, q2 chan int) {
     var quitCounter int = 0
 	for {
 		select {
-
+		
 		case temp := <-c1:
 			if temp == 1 {
 				i++
@@ -48,7 +48,7 @@ func incrementing(c chan int, q chan int) {
 func decrementing(c chan int, q chan int) {
 	//TODO: decrement i 1000000 times
 
-	for i := 0; i < 1000001; i++ {
+	for i := 0; i < 1000027; i++ {
 		c <- -1
 	}
 	q <- 0

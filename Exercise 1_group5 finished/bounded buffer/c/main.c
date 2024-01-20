@@ -18,7 +18,6 @@ struct BoundedBuffer {
 struct BoundedBuffer* buf_new(int size){
     struct BoundedBuffer* buf = malloc(sizeof(struct BoundedBuffer));
     buf->buf = rb_new(size);
-    
     pthread_mutex_init(&buf->mtx, NULL);
     // TODO: initialize semaphores
     sem_init(&buf->capacity,      0, size);

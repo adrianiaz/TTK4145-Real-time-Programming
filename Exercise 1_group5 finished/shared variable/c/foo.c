@@ -11,7 +11,7 @@ int k = 0;
 // Note the return type: void*
 void* incrementingThreadFunction(){
     
-    for (int i = 0; i < 1000002; i++)
+    for (int i = 0; i < 1000000; i++)
     {
         pthread_mutex_lock(&mutex);
         k++;
@@ -46,7 +46,7 @@ int main(){
     // wait for the two threads to be done before printing the final result
     // Hint: Use `pthread_join`
     pthread_join(thread1,NULL);
-    pthread_join(thread2,NULL);    
+    pthread_join(thread2,NULL);  
     
     pthread_mutex_destroy(&mutex);
     printf("The magic number is: %d\n", k);

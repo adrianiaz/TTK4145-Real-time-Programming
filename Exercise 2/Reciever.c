@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define PORT 30000
 #define BUFFER_SIZE 80
@@ -15,7 +16,7 @@
 int main() {
     int socketDescriptor;
     char storageBuffer[BUFFER_SIZE];
-    int lengthOfAddress;
+    socklen_t lengthOfAddress;
     struct sockaddr_in recieverAddress;
     struct sockaddr_in connectionAddress;
 
@@ -47,7 +48,7 @@ int main() {
 
     // Receive data sent by lab server
     lengthOfAddress = sizeof(connectionAddress);
-    ssize_t bytesReceived = recvfrom(socketDescriptor, storageBuffer, sizeof(storageBuffer), 0, (struct sockaddr*)&connectionAddress, &lengthOfAddress);
+    ssize_t bytesReceived = recvfrom(socketDescriptor, storageBuffer, sizeof(storageBuffer), 0, (struct sockaddr*)&connectionAddress, &(lengthOfAddress));
     if (bytesReceived < 0) {
         perror("Error receiving data");
         exit(EXIT_FAILURE);
@@ -60,6 +61,7 @@ int main() {
 
     // Close the socket
     close(socketDescriptor);
+    
 
     return 0;
 }
