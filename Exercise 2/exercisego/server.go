@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"time"
 )
 
 func server() {
@@ -25,8 +24,6 @@ func server() {
 	//continiously look for message from clients, and confirm that message is recieved
 	for {
 		//close connection if no message is recieved in 5 seconds
-		conn.SetDeadline(time.Now().Add(5 * time.Second))
-
 		message, err := bufio.NewReader(conn).ReadString('\n')
 		if err != nil {
 			log.Fatal(err)
