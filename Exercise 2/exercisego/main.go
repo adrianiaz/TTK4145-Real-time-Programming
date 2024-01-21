@@ -6,5 +6,7 @@ import (
 
 func main() {
 	fmt.Println("booting server")
-	server()
+	go server()
+	go client()
+	select {}
 }

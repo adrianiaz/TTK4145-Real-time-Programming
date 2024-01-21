@@ -14,7 +14,7 @@ func server() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("listening on socket 80000")
+	fmt.Println("listening on socket 8000")
 	//accept connections to the listening socket
 	conn, err := socket.Accept()
 	if err != nil {
@@ -30,8 +30,8 @@ func server() {
 		}
 		fmt.Println("Message from client: ", message)
 
-		var returnMessagetoClient string = "Message recieved"
-		conn.Write([]byte(returnMessagetoClient + "\n"))
+		var returnMessagetoClient string = "This is the message we recieved from you: "
+		conn.Write([]byte(returnMessagetoClient + message + "\n"))
 	}
 
 }
