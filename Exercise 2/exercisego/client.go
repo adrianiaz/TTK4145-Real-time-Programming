@@ -16,7 +16,14 @@ func client() {
 
 	//loop for reading/writing to the server
 	for {
-		textIn = bufio.NewReader(os.Stdin)
+		inputbuffer := bufio.NewReader(os.Stdin)
 		fmt.Print("Text to send: ")
+		text, _ := inputbuffer.ReadString('\n')
+		fmt.Fprint(connection, text+"\n")
+		message, err := bufio.NewReader(connection).ReadString('\n')
+		if err != nil {
+			log.Fatal(err)
+		}
+		println("Message from server: " + message)
 	}
 }

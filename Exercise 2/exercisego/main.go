@@ -6,5 +6,5 @@ import (
 
 func main() {
 	fmt.Println("booting server")
-	Server()
+	server()
 }
