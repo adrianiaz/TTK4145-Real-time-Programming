@@ -1,4 +1,4 @@
-package main
+package testers
 
 import (
 	"bufio"
@@ -7,7 +7,7 @@ import (
 	"net"
 )
 
-func server() {
+func Server() {
 	//create socket
 	socket, err := net.Listen("tcp4", ":8000")
 	if err != nil {
