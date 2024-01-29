@@ -2,7 +2,7 @@ package main
 
 import (
 	"exercisego/tcpclient"
-	"exercisego/udpclient"
+	//"exercisego/udpclient"
 )
 
 //FOR UDP:
@@ -18,6 +18,6 @@ import (
 //(IP of your machine and port you are listening to). You can find your own address by running ifconfig in the terminal
 
 func main() {
-	tcpclient.Tcpclient()
-	udpclient.Udpclient()
+	tcpclient.Tcpclient("10.100.23.186", "34933")
+	//udpclient.Udpclient("10.100.23.186", "20005")
 }
