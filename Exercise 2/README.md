@@ -12,9 +12,7 @@ This exercise serves three goals:
 This exercise does not make any explicit requirements or recommendations for multithreading or language. As for the networking-infrastructure-goal, you should keep the end goal in sight (the project, and what it needs), and not get (too) bogged down by the details. But the details are still important, as they are what give you the understanding needed.
 
 From here, the exercise is roughly divided into two parts:
- 1. The first part is to make you more familiar with using TCP and UDP for communication between processes running on different machines. Do not think about code quality here - there are a lot of new things to learn, so focus on exploration and understanding.  
- This part should be handed in for approval.
- 2. The second part will have you consider the things you have learned about these two protocols, and either create or find (or modify) a network module that you can use in your project.  
+ 1. The first part is to make you more familiar with using TCP and UDP for communication between processes running on different machines. Do not think about code quality here - there are a lot of new things to := bufio.NewReader(os.Stdin)
  This part does not have to be handed in, but you may find it useful to discuss with the student assistants.
 
 Exactly how you do communication for the project is up to you, so if you want to venture out into the land of libraries you should make sure that the library satisfies all your requirements, and knowing how TCP and UDP work will help you make an informed decision. You should also check the license.
@@ -28,7 +26,7 @@ If you are doing this exercise in Erlang or Elixir, you will want to skip the pa
 
 ---
 
-Since network programming requires that both sending and receiving works at the same time, it becomes quite difficult to get things right when starting out. This exercise comes with a pre-made network server, so that you can incrementally create one new thing at a time. On the lab, this networking server is run on the machine near the student assistants (so you do not need to do anything to set it up), and also prints out a full log of everything. If you are working from home, you may want to run such a server yourself, and instructions to do so are found in this document (./working-from-home.md).
+Since network programming requirelternatively, you can use socket sets and the `select()` (http://en.wikipedia.org/wiki/Select_%28Unix%29) funs that both sending and receiving works at the same time, it becomes quite difficult to get things right when starting out. This exercise comes with a pre-made network server, so that you can incrementally create one new thing at a time. On the lab, this networking server is run on the machine near the student assistants (so you do not need to do anything to set it up), and also prints out a full log of everything. If you are working from home, you may want to run such a server yourself, and instructions to do so are found in this document (./working-from-home.md).
 
 Practical tips:
  - Sharing a socket between threads should not be a problem, although reading from a socket in two threads will probably mean that only one of the threads gets the message. If you are using blocking sockets, you could create a "receiving"-thread for each socket. 
@@ -50,21 +48,26 @@ The server will respond to any message you send to it. Try sending a message to 
 
 Exactly how you do communication for the project is up to you, so if you want to venture out into the land of libraries you should make sure that the library satisfies all your requirements, and knowing how TCP and UDP work will help you make an informed decision. You should also check the license.
 
----
+---he address we are listening for messages on
+// we have no choice in IP, so use 0.0.0.0, INADDR_ANY, or leave the IP field empty
+// the port should be whatever the sender sends to
+// alternate names: sockaddr, resolve(udp)addr, 
+InternetAddress addr
 
-If you are doing this exercise in Erlang or Elixir, you will want to skip the part about TCP, and learn how to use Nodes instead. But UDP might still be useful, in order to make something that can auto-detect the IP addresses of the other nodes on the network. Some links to get you started:
- - Distributed Erlang (http://erlang.org/doc/reference_manual/distributed.html)
- - Elixir School on OTP Distribution (https://elixirschool.com/en/lessons/advanced/otp_distribution)
- - Elixir documentation on `Node` (https://hexdocs.pm/elixir/Node.html). 
+// a socket that plugs our program to the network. This is the "portal" to the outside world
+// alternate names: conn
+// UDP is sometimes called SOCK_DGRAM. You will sometimes also find UDPSocket or UDPConn as separate types
+recvSock = new Socket(udp)
 
----
-ere `n` is the number of the workspace you're sitting at. Listen to messages from the server and print them to a terminal to confirm that the messages are in fact being responded to.
+// bind the address we want to use to the socket
+recvSock.bind(addr)
 
-- The server will act the same way if you send a broadcast (`#.#.#.255` or `255.255.255.255`) instead of sending directly to the server.
-  - If you use broadcast, the messages will loop back to you! The server prefixes its reply with "You said: ", so you can tell if you are getting a reply from the server or if you are just listening to yourself.
-- You are free to mess with the people around you by using the same port as them, but they may not appreciate it.
-- It may be easier to use two sockets: one for sending and one for receiving. You might also find it is easier if these two are separated into their own threads.
 
+// a buffer where the received network data is stored
+byte[1024] buffer  
+
+// an empty address that will be filled with info about who sent the data
+InternetAddress fromWho 
 
 1.2: TCP
 --------
@@ -126,7 +129,13 @@ This exercise serves three goals:
 This exercise does not make any explicit requirements or recommendations for multithreading or language. As for the networking-infrastructure-goal, you should keep the end goal in sight (the project, and what it needs), and not get (too) bogged down by the details. But the details are still important, as they are what give you the understanding needed.
 
 From here, the exercise is roughly divided into two parts:
- 1. The first part is to make you more familiar with using TCP and UDP for communication between processes running on different machines. Do not think about code quality here - there are a lot of new things to learn, so focus on exploration and understanding.  
+ 1. The first part is to make you more familiar with using TCP and UDP for communication between processes running on different machines. Do not think about code quality here - there are a lot of new things to learn, so focus on exploration and undersserver will respond to any message you send to it. Try sending a message to the server IP on port `20000 + n` wh
+
+Exactly how you do communication for the project is up to you, so if you want to venture out into the land of libraries you should make sure that the library satisfies all your requirements, and knowing how TCP and UDP work will help you make an informed decision. You should also check the license.
+
+---
+
+If you are doing this exercise in Erlang or Elixtanding.  
  This part should be handed in for approval.
  2. The second part will have you consider the things you have learned about these two protocols, and either create or find (or modify) a network module that you can use in your project.  
  This part does not have to be handed in, but you may find it useful to discuss with the student assistants.
@@ -272,7 +281,9 @@ If you are scripting something to automate any part of this process, remember to
 
 
 Extracurricular
----------------
+---------------org/web/20140214100538/http://research.microsoft.com/en-us/people/mickens/thenightwatch.pdf)
+"Systems people discover bugs by waking up and discovering that their first-born children are missing and "ETIMEDOUT" has been written in blood on the wall."
+
 
 The Night Watch (https://web.archive.org/web/20140214100538/http://research.microsoft.com/en-us/people/mickens/thenightwatch.pdf)
 "Systems people discover bugs by waking up and discovering that their first-born children are missing and "ETIMEDOUT" has been written in blood on the wall."

@@ -26,7 +26,6 @@ func reciever(connection *net.UDPConn) {
 			log.Fatal(err)
 		}
 		fmt.Println("reviever: " + string(buf[:n]))
-
 	}
 }
 
@@ -43,8 +42,7 @@ func Udpclient(ipAddr string, port string) {
 	   	fmt.Print("What port do you want to connect to? ")
 	   	port, _ := istream2.ReadString('\n')
 	*/
-	connectionVar := ipAddr + ":" + port
-	fmt.Println(connectionVar)
+	
 
 	//dial up the net
 	addr, err := net.ResolveUDPAddr("udp", connectionVar)
