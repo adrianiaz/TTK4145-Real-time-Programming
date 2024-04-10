@@ -32,7 +32,7 @@ class Resource(T) {
         }
     }
     
-    T allocate(int priority){
+    T allocate(int priority){  
         mtx.wait();
         if (busy){
             numWaiting[priority]++;

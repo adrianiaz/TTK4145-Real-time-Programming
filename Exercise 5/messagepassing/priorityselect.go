@@ -42,11 +42,12 @@ func resourceManager(takeLow chan Resource, takeHigh chan Resource, giveBack cha
     for {
         select {
         case takeHigh<- res:
-            //fmt.Printf("[resource manager]: resource taken (high)\n")
-        case takeLow<- res:
-            //fmt.Printf("[resource manager]: resource taken (low)\n")
+            fmt.Printf("[resource manager]: resource taken (high)\n")
         case res = <-giveBack:
-            //fmt.Printf("[resource manager]: resource returned\n")
+            fmt.Printf("[resource manager]: resource returned\n")
+        default:
+            fmt.Printf("[resource manager]: resource taken (low)\n")
+            takeLow<- res
         }
     }
 }
