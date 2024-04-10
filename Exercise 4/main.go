@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	connectionVar := "127.0.0.1:27106"
+	connectionVar := "127.0.0.1:50955"
 
 	addr, err := net.ResolveUDPAddr("udp", connectionVar)
 	if err != nil {
@@ -40,7 +40,10 @@ func main() {
 	listening.Close()
 
 	//new backup
-	exec.Command("gnome-terminal", "--", "go", "run", "main.go").Run()
+	//linux
+	//exec.Command("gnome-terminal", "--", "go", "run", "main.go").Run()
+	//mac
+	exec.Command("open", "-a", "Terminal", "go", "run", "main.go").Run()
 
 	//primary mode
 	//addr, err = net.ResolveUDPAddr("udp", connectionVar)
