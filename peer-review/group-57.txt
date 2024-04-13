@@ -10,7 +10,7 @@
 
 09a72ca3
 6
-- By looking at the main function it is impossible to see how modules interact, because a lot of information is hidden in huge modules.
+-By looking at the main function it is impossible to see how modules interact, because a lot of information is hidden in huge modules.
 -The function Run(...) affects the "outside world", and does too much as the name would suggest.This makes it harder to follow data-flow. Additionally there are three Run functions in this workspace, so the same problems appears threefold.
 -The three Run()- functions are the biggest modules in the program, they inevitably have to affect the outside world, it is hard to avoid that the scope is larger than the function scope.
 -For every function you want to understand, you have to look in several different folders/files in order to find the relevant defenitions. This makes it hard to follow.
@@ -37,7 +37,14 @@
 -Their project has some good features and that makes it possible to see what they are trying to do with the design. However, the code does not lend itself to further development/ new features without much work.
 
 8610ad03
-score
--
+7
+-They use nested functions inside functions that interacts with the outside world, should be avoided. example: The function Fsm_onRequestButtonPress sends an updated request to the channel upd_request; additionally, Fsm_onRequestButtonPress is within the function Fsm_setCabOrders which gets called from main. 
+-It is really hard to try to trace a buttonpress from start to finish due to nested functions, cross-interaction between modules and 
+-The code is not organized with a reader in mind using too long argument lists, and names that are hard to make sense of. Some examples are rcd_req, cur_req , wld_updated_flag etc. Which are more confusing than helpful.
+-the fsm is split into unnecessarily many parts, and you shouldn't need to look through many different function to understand how the elevator fsm works.
+-The group has implemented some measures in case of a crash, like the watchdog which will crash the program. It will then restart a new instance of the program as well as a backup, making it protected against local crashes.
+-One can see that this group has implemented a way to find a new master in case of the master disconnecting, which is good.
+-The file structure is somewhat haphazard, it does not seem well thought through which leads to the seperation of many small functions in different folders that are related. This makes tracking the execution hard.
 
 28ba12ee
+score 
