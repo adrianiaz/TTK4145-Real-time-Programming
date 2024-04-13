@@ -6,13 +6,29 @@
 -We get a good overview of the components/modules of the system by just looking at the main file. We can see all big threads initialized there
 -Modules are made elegant, indentation is kept under control for the most part, few enough channels to easily keep track of dataflow and the channels in the arguments uses arrows to indicate direction. For instance the SendAndReceiveToSlaves module in master.go solves the problem of sharing the connections map with few lines & readable code. 
 -It seems like the creators have designed the system with fault-tolerance in mind. They use process-pairs in case of a crash, the aforementioned backup-from-file,  they use tcp to ensure acknowledgement from the slaves (backup-master), and they have used mutex sparingly in a suitable manner where the situation calls for it. 
-- The code seems to able to scale well with small changes.
-
-85eb3a09
+-The code seems to able to scale well with small changes.
 
 09a72ca3
+6
+- By looking at the main function it is impossible to see how modules interact, because a lot of information is hidden in huge modules.
+-The function Run(...) affects the "outside world", and does too much as the name would suggest.This makes it harder to follow data-flow. Additionally there are three Run functions in this workspace, so the same problems appears threefold.
+-The three Run()- functions are the biggest modules in the program, they inevitably have to affect the outside world, it is hard to avoid that the scope is larger than the function scope.
+-For every function you want to understand, you have to look in several different folders/files in order to find the relevant defenitions. This makes it hard to follow.
+-The structure of files and folders seems to be split up unnecessarily. At the same time they use giant modules. They should instead focus on splitting up the big modules, as opposed to the aforementioned unnecessary splitting.
+-The code may work but it seems impossible to evaluate if it does or not, due to the previous points. If it were to be expanded it would maybe be easier to start anew.
 
 57c93c96
+9
+-In general good structure and easily readable code. 
+-Can follow the code/the flow of information without having to jump a lot between files and folders. They have been consistent with how they implement modules.
+-Seems like the different threads deal with what they're suppose to, and nothing more.
+-Can identify the topology (circular) by looking at the code.
+-Variable names are good, and they use metaphors in a suitable manner (phoenix, garbage, deathbed etc.)
+-They have taken measures for better fault-tolerance; handled cases where nodes disconnects, and what a node does if it goes offline etc.
+-This seems to scale pretty good. They have set all config-variables in a single files, which makes it easy to change things like num of elevators etc.
+
+85eb3a09
+score
 
 8610ad03
 
