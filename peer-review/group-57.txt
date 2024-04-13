@@ -28,8 +28,16 @@
 -This seems to scale pretty good. They have set all config-variables in a single files, which makes it easy to change things like num of elevators etc.
 
 85eb3a09
-score
+7
+-The group seems to have taken measures for handling fault tolerance, such as processing-pairs in case of a crash, backup to local file.
+-It is also easy to identify that they use a peer to peer topology by looking at the code.
+-The group however, make their code hard to read due to a lot of indentation, and lack of pure functions that could make it more readable.
+-The other main problem with this project is too big modules. The function CommunicationHandler is the best example of this, as it "handles" much more than just communication. An example of this is that the worldview gets updated within this module.
+-They could have organized/named their functions better. For instance the previously mentioned CommunicationHandler, and a boolean variable "status".
+-Their project has some good features and that makes it possible to see what they are trying to do with the design. However, the code does not lend itself to further development/ new features without much work.
 
 8610ad03
+score
+-
 
 28ba12ee
