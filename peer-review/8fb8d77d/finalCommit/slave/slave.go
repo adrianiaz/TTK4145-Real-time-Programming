@@ -11,7 +11,7 @@ import (
 
 func AlertMaster(port string, id string, masterIdToAlertMasterCh chan string, masterIdToSendAndReceiveCh chan string, slaveConnCh chan<- net.Conn) {
 	var slaveConn net.Conn = nil
-	var err error                
+	var err error
 	select {
 	case c := <-masterIdToAlertMasterCh:
 		if id != c {

@@ -1,0 +1,19 @@
+8fb8d77d
+9
+-Channel-names not always so intuitive/clear for instance the channel masterIdToSendAndReceiveToMasterCh; its hard to understand what it does
+-Orders are backed up from file- easy to see, also have a solution if file is not there
+-functions stay within their scope, using pure functions where possible, and keeping code that affects outside world in the open, where it can be seen (core and shell )
+-We get a good overview of the components/modules of the system by just looking at the main file. We can see all big threads initialized there
+-Modules are made elegant, indentation is kept under control for the most part, few enough channels to easily keep track of dataflow and the channels in the arguments uses arrows to indicate direction. For instance the SendAndReceiveToSlaves module in master.go solves the problem of sharing the connections map with few lines & readable code. 
+-It seems like the creators have designed the system with fault-tolerance in mind. They use process-pairs in case of a crash, the aforementioned backup-from-file,  they use tcp to ensure acknowledgement from the slaves (backup-master), and they have used mutex sparingly in a suitable manner where the situation calls for it. 
+- The code seems to able to scale well with small changes.
+
+85eb3a09
+
+09a72ca3
+
+57c93c96
+
+8610ad03
+
+28ba12ee

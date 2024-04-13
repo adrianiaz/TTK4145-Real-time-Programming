@@ -18,7 +18,6 @@ import (
 
 var mutex sync.Mutex
 
-
 func SendAndReceiveToSlaves(id string, peerCh chan peers.PeerUpdate, masterConnCh <-chan net.Conn, connectionsCh <-chan map[string]net.Conn,
 	sendMapToSlavesCh <-chan map[string]elevator.Elevator, getElevFromSlave chan elevator.Elevator) {
 	var connections map[string]net.Conn
@@ -47,7 +46,7 @@ func SendAndReceiveToSlaves(id string, peerCh chan peers.PeerUpdate, masterConnC
 		case c := <-sendMapToSlavesCh:
 			mutex.Lock()
 			for _, v := range connections {
-				tcp.Transmit(v, c) 
+				tcp.Transmit(v, c)
 			}
 			mutex.Unlock()
 		}
